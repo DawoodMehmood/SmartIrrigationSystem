@@ -66,4 +66,55 @@ void setup()
 
 void loop()
 {
+    // reading values
+    moisture = analogRead(moistureIN); // reading moisture value from sensor as analog value
+    humidity = analogRead(humidityIN); // reading moisture value from sensor as analog value
+    rain = digitalRead(rainIN);        // reading rain value from switch as digital value
+    temp = analogRead(tempIN);         // reading temperature value from sensor as analog value
+
+    // convert temperature into Celsius value
+    voltage = temp * (5000 / 1023.0);     // brings value between 0-5V
+    tempInCelsius = (voltage - 500) / 10; // 500 is the offset
+
+    // convert humidity(potentiometer) value to percentage
+    humidityInPercentage = map(humidity, 0, 1023, 0, 100); // changing potentiometer scale from 0-1023 to 0-100
+
+    // printing values to the console
+    Serial.print("Temperature: ");
+    Serial.print(tempInCelsius);
+    Serial.println(" C");
+    Serial.print("Moisture: ");
+    Serial.println(moisture);
+    Serial.print("Humidity: ");
+    Serial.print(humidityInPercentage);
+    Serial.println(" %");
+    if (rain == 0)
+    {
+        Serial.println("Not Raining");
+    }
+    else
+    {
+        Serial.println("Its Raining");
+    }
+    Serial.println();
+
+    // printing values on the screen
+    lcd.print("Temp: ");
+    lcd.setCursor(7, 0);
+    lcd.print(tempInCelsius);
+    lcd.setCursor(14, 0);
+    lcd.print("C");
+    lcd.setCursor(0, 1);
+    lcd.print("Moisture: ");
+    lcd.setCursor(11, 1);
+    lcd.print(moisture);
+    delay(100);
+    lcd.clear();
+    lcd.print("Humidity: ");
+    lcd.setCursor(8, 1);
+    lcd.print(humidityInPercentage);
+    lcd.setCursor(14, 1);
+    lcd.print("%");
+    delay(100);
+    lcd.clear();
 }
