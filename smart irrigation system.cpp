@@ -117,4 +117,22 @@ void loop()
     lcd.print("%");
     delay(100);
     lcd.clear();
+
+    // handling core logic
+
+    // when its raining, there is no need for watering
+    if (rain == 1)
+    {
+        digitalWrite(greenLED, HIGH);
+        digitalWrite(redLED, LOW);
+        digitalWrite(buzzerOUT, LOW);
+        digitalWrite(pumpOUT, LOW);
+        lcd.print("Water Pump OFF");
+        delay(100);
+        lcd.clear();
+        lcd.print("Its Raining");
+    }
+
+       delay(100);
+    lcd.clear();
 }
