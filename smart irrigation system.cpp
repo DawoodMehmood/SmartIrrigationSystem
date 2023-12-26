@@ -40,6 +40,28 @@ const int humidityLowerBound = 20;  // denoting low humidity, so high soil moist
 
 void setup()
 {
+    // starting the LCD screen
+    lcd.begin(16, 2);
+
+    // start up msg on LCD
+    lcd.print("Smart Irrigation");
+    lcd.setCursor(0, 1);
+    lcd.print("System-byDawood");
+    delay(2000);
+    lcd.clear();
+
+    // defining pin modes
+    pinMode(moistureIN, INPUT);
+    pinMode(tempIN, INPUT);
+    pinMode(humidityIN, INPUT);
+    pinMode(rainIN, INPUT);
+    pinMode(pumpOUT, OUTPUT);
+    pinMode(buzzerOUT, OUTPUT);
+    pinMode(greenLED, OUTPUT);
+    pinMode(redLED, OUTPUT);
+
+    Serial.begin(9600);
+    delay(500); // delay to let the system boot
 }
 
 void loop()
