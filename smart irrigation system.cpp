@@ -7,6 +7,12 @@
 // Rain is denoted using just a switch
 // Water pump is replicated using a DC motor
 
+// Library to use LCD screen
+#include <Adafruit_LiquidCrystal.h>
+
+// initialzing LCD object
+Adafruit_LiquidCrystal lcd(0);
+
 // defining pins for different inputs & outputs
 const int moistureIN = A1;
 const int tempIN = A2;
