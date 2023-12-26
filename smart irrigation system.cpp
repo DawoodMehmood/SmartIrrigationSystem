@@ -133,6 +133,46 @@ void loop()
         lcd.print("Its Raining");
     }
 
-       delay(100);
+    // when moisture is lesser than minimum value, then water
+    else if (moisture < moistureLowerBound)
+    {
+        digitalWrite(greenLED, LOW);
+        digitalWrite(redLED, HIGH);
+        digitalWrite(buzzerOUT, HIGH);
+        digitalWrite(pumpOUT, HIGH);
+        lcd.print("Water Pump ON");
+    }
+
+    // when moisture is greater than minimum value but lesser than maximum value
+    // and temperature is higher than maximum acceptable value, then water
+    else if (moisture < moistureUpperBound && tempInCelsius > tempUpperBound)
+    {
+        digitalWrite(greenLED, LOW);
+        digitalWrite(redLED, HIGH);
+        digitalWrite(buzzerOUT, HIGH);
+        digitalWrite(pumpOUT, HIGH);
+        lcd.print("Water Pump ON");
+    }
+
+    // when moisture is greater than minimum value but lesser than maximum value
+    // and humidity is lower than minimum acceptable value, then water
+    else if (moisture < moistureUpperBound && humidityInPercentage < humidityLowerBound)
+    {
+        digitalWrite(greenLED, LOW);
+        digitalWrite(redLED, HIGH);
+        digitalWrite(buzzerOUT, HIGH);
+        digitalWrite(pumpOUT, HIGH);
+        lcd.print("Water Pump ON");
+    }
+    else
+    {
+        digitalWrite(greenLED, HIGH);
+        digitalWrite(redLED, LOW);
+        digitalWrite(buzzerOUT, LOW);
+        digitalWrite(pumpOUT, LOW);
+        lcd.print("Water Pump OFF");
+    }
+
+    delay(100);
     lcd.clear();
 }
