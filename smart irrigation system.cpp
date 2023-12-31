@@ -122,9 +122,12 @@ void loop()
   
   
   // Construct HTTP call.
-  String httpPacket_1 = "GET "+CHANNEL_FEED_URI_1 + String(temp) +
-                    "&" + CHANNEL_FEED_URI_2 + String(moisture) +
-                    "&" + CHANNEL_FEED_URI_3 + String(rain) + "&" + CHANNEL_FEED_URI_4 + String(humidity) + "&" + CHANNEL_FEED_URI_5 + String(pumpOUT) + " HTTP/1.1\r\nHost: " + host + "\r\n\r\n";
+String httpPacket_1 = "GET " + CHANNEL_FEED_URI_1 + String(temp) +
+                     "&" + CHANNEL_FEED_URI_2 + String(moisture) +
+                     "&" + CHANNEL_FEED_URI_3 + String(rain) + 
+                     "&" + CHANNEL_FEED_URI_4 + String(humidity) + 
+                     "&" + CHANNEL_FEED_URI_5 + String((pumpOUT == HIGH) ? 1 : 0) +
+                     " HTTP/1.1\r\nHost: " + host + "\r\n\r\n";
   int packetLength_1 = httpPacket_1.length();
   // Send the data to the server. Also send the packet length.
   Serial.print("AT+CIPSEND=");
